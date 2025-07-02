@@ -1,69 +1,105 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🛠️ Task Manager App
 
-Currently, two official plugins are available:
+A task management dashboard built with **Vite**, **React**, **Redux Toolkit**, **Material UI**, and **TypeScript**. Features include role-based authentication, project/task tracking, user management, and dynamic routing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📦 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router v6](https://reactrouter.com/)
+- [Material UI](https://mui.com/)
+- [Formik + Yup](https://formik.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🚀 Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/task-manager.git
+cd task-manager
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Start the Development Server
+
+```bash
+npm run dev
+```
+
+> Vite will start your project at [http://localhost:5173](http://localhost:5173) by default.
+
+---
+
+## 👤 Login Credentials
+
+Use the following test credentials:
+
+### 🔐 Admin
+
+- **Email:** `admin@example.com`
+- **Password:** `admin123`
+
+### 👷 User
+
+- **Email:** `user@example.com`
+- **Password:** `user123`
+
+---
+
+## 🧩 Project Structure
+
+```bash
+src/
+├── components/         # Reusable UI components
+│   ├── auth/           # Auth guards (RequireAuth)
+│   ├── login/          # Login form
+│   ├── projects/       # Project modal and related components
+│   └── task/           # Task board and chart
+├── pages/              # Route pages (dashboard, users, etc.)
+├── redux/              # Redux slices (projectSlice, taskSlice, userSlice)
+├── layout/             # Application layout
+└── main.tsx            # Vite entry point
+```
+
+---
+
+## 🛡️ Role-Based Routing
+
+- **Admin:** Can access all routes (`/`, `/project/:id`, `/users`)
+- **User:** Limited to assigned projects and project dashboard
+
+Routes are protected using `<RequireAuth role="admin" />` or `<RequireAuth />`.
+
+---
+
+## 🛠️ Build for Production
+
+```bash
+npm run build
+```
+
+The compiled files will be in the `dist/` directory.
+
+---
+
+## 📄 License
+
+MIT License © 2025
+
+---
+
+## 🙌 Contributing
+
+Pull requests and suggestions are welcome!
