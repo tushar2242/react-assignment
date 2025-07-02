@@ -5,8 +5,8 @@ import TaskColumn from './TaskColumn';
 
 const statuses = ['To do', 'Pending', 'Done'];
 
-const TaskBoard: React.FC = () => {
-    const tasks = useSelector((state: any) => state.tasks.tasks);
+const TaskBoard = ({ tasks }: any) => {
+
 
     return (
         <div className="task-board">

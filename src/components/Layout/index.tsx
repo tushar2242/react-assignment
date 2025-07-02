@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './layout.css'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import './layout.css';
 
 interface Props {
     children: React.ReactNode;
@@ -8,26 +8,38 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    const role = user?.role;
+
+    const handleLogout = () => {
+        localStorage.removeItem('loggedInUser');
+        navigate('/login');
+    };
 
     return (
         <div className="layout">
-            {/* Sidebar */}
             <aside className="sidebar">
-                <h2>🧠 TaskManager</h2>
-                <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Dashboard</Link>
-                <Link to="/create" className={`nav-link ${location.pathname === '/create' ? 'active' : ''}`}>Create Task</Link>
-                <Link to="/report" className={`nav-link ${location.pathname === '/report' ? 'active' : ''}`}>Reports</Link>
+                <h2>TaskManager</h2>
+                <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Projects</Link>
+                {role === 'admin' && (
+                    <Link to="/users" className={`nav-link ${location.pathname === '/users' ? 'active' : ''}`}>Users</Link>
+                )}
+                <Link to="/settings" className={`nav-link ${location.pathname === '/settings' ? 'active' : ''}`}>Settings</Link>
             </aside>
 
-            {/* Main Area */}
             <div className="main">
-                {/* Topbar */}
                 <header className="topbar">
-                    <h1>Welcome Back 👋</h1>
-                    <div className="user-info">User: John Doe</div>
+                    <h1>Welcome Back</h1>
+                    <div className="user-info">
+                        User: {user?.name || 'Guest'} ({role || 'N/A'})
+                        <button onClick={handleLogout} style={{ marginLeft: '1rem' }}>
+                            Logout
+                        </button>
+                    </div>
                 </header>
 
-                {/* Page Content */}
                 <main className="content">
                     {children}
                 </main>
